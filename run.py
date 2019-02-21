@@ -2,7 +2,6 @@
 
 Operates a series of queries from JSON to SQLite to Excel.
 """
-import stock_query
 
 import stock_query
 
