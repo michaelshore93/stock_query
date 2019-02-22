@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy import Column, String, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -10,6 +11,9 @@ import sqlite3
 from openpyxl import Workbook
 from openpyxl.chart import Reference, BarChart3D, LineChart
 import pandas as pd
+
+now = datetime.now()
+today = "{}-{}-{}".format(now.year, now.month, now.day)
 
 print("""I only have a free API (not paying $35/mo for premium, so \
 you can only use my key for certain stocks. \
@@ -98,7 +102,7 @@ class DB_Connection:
 
 
 class Workbook:
-    wbook_name = "{}.xlsx".format(stock)
+    wbook_name = "{}_{}.xlsx".format(stock, today)
     wb = Workbook()
 
     def closeprice():
