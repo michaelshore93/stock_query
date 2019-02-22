@@ -11,9 +11,6 @@ from openpyxl import Workbook
 from openpyxl.chart import Reference, BarChart3D, LineChart
 import pandas as pd
 
-
-
-
 print("""I only have a free API (not paying $35/mo for premium, so \
 you can only use my key for certain stocks. \
 Apple (AAPL), Microsoft (MSFT), and Goldman Sachs (GS) are some \
