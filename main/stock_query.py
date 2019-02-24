@@ -44,7 +44,7 @@ class JSON_Connection:
                 dict_set["High"] = element[9]
                 dict_set["Low"] = element[10]
                 dict_set["ClosePrice"] = element[11]
-                dict_set["Volume"] = element[5]
+                dict_set["Volume"] = element[12]
                 stock_data.append(dict_set)
 
             stock_data = sorted(stock_data, key=itemgetter("Date_yy_mm_dd"))
