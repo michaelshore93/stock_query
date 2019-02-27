@@ -7,8 +7,6 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-.Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -95,6 +93,8 @@ venv.bak/
 .spyproject
 
 # Rope project settings
+.Python
+build/
 .ropeproject
 
 # mkdocs documentation
@@ -105,3 +105,6 @@ venv.bak/
 
 # README
 README.md
+
+# LICENSE
+LICENSE
