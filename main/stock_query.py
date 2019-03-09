@@ -1,8 +1,7 @@
 from datetime import datetime
-from sqlalchemy import Column, String, Numeric
+from sqlalchemy import Column, String, Numeric, create_engine, exc
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine, exc
 import requests
 import key
 from operator import itemgetter
