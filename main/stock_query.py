@@ -28,23 +28,43 @@ engine = create_engine("sqlite:///stocks.db")
 Base = declarative_base()
 
 
+class Last_Ran_Check:
+    def last_row_pr_key():
+        """Checks for last row of data's primary key."""
+        conn = sqlite3.connect("stocks.db")
+        c = conn.cursor()
+        try:
+            query = "SELECT * FROM {} ORDER BY Date_yy_mm_dd DESC LIMIT 1".format(stock)
+            last_date = list(c.execute(query))[0][0]
+            return last_date
+        except sqlite3.OperationalError:
+            last_date = "foobar"
+            return last_date
+        except IndexError:
+            last_date = "foobar"
+            return last_date
+
+
 class JSON_Connection:
     def connect_json():
         """Queries JSON of data."""
+        last_date = Last_Ran_Check.last_row_pr_key()
         url = "https://www.quandl.com/api/v3/datasets/EOD/{}.json?api_key={}".format(stock, key.api_key)
         data_json = requests.get(url).json()
         stock_data = []
 
         try:
             for element in data_json["dataset"]["data"]:
-                dict_set = {}
-                dict_set["Date_yy_mm_dd"] = element[0]
-                dict_set["OpenPrice"] = element[8]
-                dict_set["High"] = element[9]
-                dict_set["Low"] = element[10]
-                dict_set["ClosePrice"] = element[11]
-                dict_set["Volume"] = element[12]
-                stock_data.append(dict_set)
+                    if element[0] == last_date:
+                        break
+                    dict_set = {}
+                    dict_set["Date_yy_mm_dd"] = element[0]
+                    dict_set["OpenPrice"] = element[8]
+                    dict_set["High"] = element[9]
+                    dict_set["Low"] = element[10]
+                    dict_set["ClosePrice"] = element[11]
+                    dict_set["Volume"] = element[12]
+                    stock_data.append(dict_set)
 
             stock_data = sorted(stock_data, key=itemgetter("Date_yy_mm_dd"))
         except KeyError:
@@ -53,6 +73,8 @@ class JSON_Connection:
             sys.exit(0)
 
         return stock_data
+        for element in stock_data:
+            print(element)
 
 
 class SL_Table(Base):
@@ -79,14 +101,13 @@ class DB_Session:
         session = Session()
 
         for element in stock_data:
-                p_key = element["Date_yy_mm_dd"]
                 row = SL_Table(**element)
-                print(p_key)
 
                 try:
                     session.add(row)
                     session.commit()
                 except exc.IntegrityError:
+                    print("Integrity error.")
                     session.rollback()
 
 
@@ -95,7 +116,7 @@ class DB_Connection:
         """Establishes connection with table in SQLite database."""
         conn = sqlite3.connect("stocks.db")
         c = conn.cursor()
-        mysel = c.execute("select * from {}".format(stock))
+        mysel = c.execute("SELECT * from {}".format(stock))
         connection = sqlite3.connect("stocks.db")
         return mysel, connection
 

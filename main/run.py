@@ -6,6 +6,7 @@ Operates a series of queries from JSON to SQLite to Excel.
 import stock_query
 
 if __name__ == "__main__":
+    stock_query.Last_Ran_Check.last_row_pr_key()
     stock_query.JSON_Connection.connect_json()
     stock_query.DB_Session.json_to_db()
     stock_query.Workbook.closeprice()
