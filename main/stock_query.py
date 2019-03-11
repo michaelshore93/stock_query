@@ -21,7 +21,7 @@ that work.\n\nIf you want to check, type \
 https://www.quandl.com/api/v3/datasets/EOD/{STOCK TICKER HERE}.json?api_key=EPaRw4wZxHqisMT9gMdX \
 into your browser.""")
 
-stock = input("Enter stock ticker. ").upper()
+stock = input("Please enter stock ticker. ").upper()
 print(stock)
 
 engine = create_engine("sqlite:///stocks.db")
