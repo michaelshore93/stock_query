@@ -131,7 +131,7 @@ class Workbook:
         ws.title = "Close Price"
         mysel, connection = DB_Connection.connect_db()
 
-        """SELECT relevant data FROM database and write it to Excel."""
+        """Selects relevant data from database and write it to Excel."""
         cursor = connection.execute("SELECT * FROM {}".format(stock))
         names = list(map(lambda x: x[0], cursor.description))
         idx = 1
@@ -163,7 +163,7 @@ class Workbook:
         Workbook.wb.save(Workbook.wbook_name)
 
     def open_close_delta():
-        """Create a sheet for Open/Close delta."""
+        """Creates a sheet for Open/Close delta."""
         ws2 = Workbook.wb.create_sheet("Open Close Delta")
         mysel, connection = DB_Connection.connect_db()
         cursor = connection.execute("SELECT * FROM {}".format(stock))
