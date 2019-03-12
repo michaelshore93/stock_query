@@ -131,7 +131,7 @@ class Workbook:
         ws.title = "Close Price"
         mysel, connection = DB_Connection.connect_db()
 
-        """Selects relevant data from database and write it to Excel."""
+        """Selects relevant data from database and writes it to Excel."""
         cursor = connection.execute("SELECT * FROM {}".format(stock))
         names = list(map(lambda x: x[0], cursor.description))
         idx = 1
