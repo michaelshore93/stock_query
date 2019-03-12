@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, String, Numeric, create_engine, exc
+from sqlalchemy import Column, String, Numeric, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import requests
@@ -102,13 +102,8 @@ class DB_Session:
 
         for element in stock_data:
                 row = SL_Table(**element)
-
-                try:
-                    session.add(row)
-                    session.commit()
-                except exc.IntegrityError:
-                    print("Integrity error.")
-                    session.rollback()
+                session.add(row)
+        session.commit()
 
 
 class DB_Connection:
