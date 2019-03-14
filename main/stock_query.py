@@ -73,8 +73,6 @@ class JSON_Connection:
             sys.exit(0)
 
         return stock_data
-        for element in stock_data:
-            print(element)
 
 
 class SL_Table(Base):
@@ -155,7 +153,7 @@ class Workbook:
         line.width = 35
         line.legend = None
         ws.add_chart(line, "D10")
-        Workbook.wb.save(Workbook.wbook_name)
+    #    Workbook.wb.save(Workbook.wbook_name)
 
     def open_close_delta():
         """Creates a sheet for Open/Close delta."""
