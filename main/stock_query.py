@@ -34,7 +34,7 @@ class Last_Ran_Check:
         conn = sqlite3.connect("stocks.db")
         c = conn.cursor()
         try:
-            query = "SELECT * FROM {} ORDER BY Date_yy_mm_dd DESC LIMIT 1".format(stock)
+            query = "SELECT * FROM {} ORDER BY Date_yyyy_mm_dd DESC LIMIT 1".format(stock)
             last_date = list(c.execute(query))[0][0]
             return last_date
         except sqlite3.OperationalError:
@@ -58,7 +58,7 @@ class JSON_Connection:
                     if element[0] == last_date:
                         break
                     dict_set = {}
-                    dict_set["Date_yy_mm_dd"] = element[0]
+                    dict_set["Date_yyyy_mm_dd"] = element[0]
                     dict_set["OpenPrice"] = element[8]
                     dict_set["High"] = element[9]
                     dict_set["Low"] = element[10]
@@ -66,7 +66,7 @@ class JSON_Connection:
                     dict_set["Volume"] = element[12]
                     stock_data.append(dict_set)
 
-            stock_data = sorted(stock_data, key=itemgetter("Date_yy_mm_dd"))
+            stock_data = sorted(stock_data, key=itemgetter("Date_yyyy_mm_dd"))
         except KeyError:
             table_check = "Invalid ticker."
             print(table_check)
@@ -80,7 +80,7 @@ class SL_Table(Base):
     table_check = JSON_Connection.connect_json()
     if table_check != "Invalid ticker.":
         __tablename__ = stock
-        Date_yy_mm_dd = Column(String, primary_key=True)
+        Date_yyyy_mm_dd = Column(String, primary_key=True)
         OpenPrice = Column(Numeric)
         High = Column(Numeric)
         Low = Column(Numeric)
