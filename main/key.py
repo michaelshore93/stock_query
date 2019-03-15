@@ -1,2 +1,2 @@
-# This is a free API key, so for convenience, I am ignoring best practices and posting it for ease of use.
-api_key = "EPaRw4wZxHqisMT9gMdX"
+# You can get a free API Key here: https://www.quandl.com/tools/api
+api_key = " "
