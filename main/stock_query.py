@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, String, Numeric, create_engine
+from sqlalchemy import Column, Date, Numeric, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import requests
@@ -58,7 +58,7 @@ class JSON_Connection:
                     if element[0] == last_date:
                         break
                     dict_set = {}
-                    dict_set["Date_yyyy_mm_dd"] = element[0]
+                    dict_set["Date_yyyy_mm_dd"] = datetime(int(element[0][0:4]), int(element[0][5:7]),int(element[0][8:10]))
                     dict_set["OpenPrice"] = element[8]
                     dict_set["High"] = element[9]
                     dict_set["Low"] = element[10]
@@ -80,7 +80,7 @@ class SL_Table(Base):
     table_check = JSON_Connection.connect_json()
     if table_check != "Invalid ticker.":
         __tablename__ = stock
-        Date_yyyy_mm_dd = Column(String, primary_key=True)
+        Date_yyyy_mm_dd = Column(Date, primary_key=True)
         OpenPrice = Column(Numeric)
         High = Column(Numeric)
         Low = Column(Numeric)
