@@ -27,7 +27,7 @@ print(stock)
 engine = create_engine("sqlite:///stocks.db")
 Base = declarative_base()
 conn = sqlite3.connect("stocks.db")
-c = .cursor()
+c = conn.cursor()
 
 
 class Last_Ran_Check:
