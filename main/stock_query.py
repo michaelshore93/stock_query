@@ -26,13 +26,13 @@ print(stock)
 
 engine = create_engine("sqlite:///stocks.db")
 Base = declarative_base()
+conn = sqlite3.connect("stocks.db")
+c = .cursor()
 
 
 class Last_Ran_Check:
     def last_row_pr_key():
         """Checks for last row of data's primary key."""
-        conn = sqlite3.connect("stocks.db")
-        c = conn.cursor()
         try:
             query = "SELECT * FROM {} ORDER BY Date_yyyy_mm_dd DESC LIMIT 1".format(stock)
             last_date = list(c.execute(query))[0][0]
@@ -107,8 +107,6 @@ class DB_Session:
 class DB_Connection:
     def connect_db():
         """Establishes connection with table in SQLite database."""
-        conn = sqlite3.connect("stocks.db")
-        c = conn.cursor()
         mysel = c.execute("SELECT * FROM {}".format(stock))
         connection = sqlite3.connect("stocks.db")
         return mysel, connection
