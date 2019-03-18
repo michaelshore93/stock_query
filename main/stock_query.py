@@ -109,7 +109,7 @@ class DB_Connection:
         """Establishes connection with table in SQLite database."""
         conn = sqlite3.connect("stocks.db")
         c = conn.cursor()
-        mysel = c.execute("SELECT * from {}".format(stock))
+        mysel = c.execute("SELECT * FROM {}".format(stock))
         connection = sqlite3.connect("stocks.db")
         return mysel, connection
 
