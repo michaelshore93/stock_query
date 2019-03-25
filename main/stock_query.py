@@ -151,7 +151,7 @@ class Workbook:
         line.width = 35
         line.legend = None
         ws.add_chart(line, "D10")
-    #    Workbook.wb.save(Workbook.wbook_name)
+        # Workbook.wb.save(Workbook.wbook_name)
 
     def open_close_delta():
         """Creates a sheet for Open/Close delta."""
@@ -172,7 +172,7 @@ class Workbook:
             post = row[0], row[1], row[4]
             counter += 1
             ws2.append(post)
-        Workbook.wb.save(Workbook.wbook_name)
+       # Workbook.wb.save(Workbook.wbook_name)
 
         """Uses pandas to create a new field, Open/Close Delta."""
         ws2["D1"] = "Delta"
