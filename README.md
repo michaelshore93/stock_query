@@ -6,5 +6,7 @@ Uses a REST API to query Quandl's database for select stocks (the ones that are 
 My recommendation is to type the following into terminal before running the program (name venv whatever you want):
 
 virtualenv --no-site-packages venv
+
 source venv/bin/activate
+
 pip install -r requirements.txt
