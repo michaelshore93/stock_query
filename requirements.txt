@@ -1,7 +1,4 @@
 datetime
-sqlalchemy
 requests
-sys
-sqlite3
 openpyxl
 pandas
