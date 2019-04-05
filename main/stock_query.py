@@ -8,7 +8,7 @@ from operator import itemgetter
 import sys
 import sqlite3
 from openpyxl import Workbook
-from openpyxl.chart import Reference, BarChart3D, LineChart
+from openpyxl.chart import Reference, LineChart, BarChart
 import pandas as pd
 
 now = datetime.now()
@@ -172,7 +172,7 @@ class Workbook:
             post = row[0], row[1], row[4]
             counter += 1
             ws2.append(post)
-       # Workbook.wb.save(Workbook.wbook_name)
+        Workbook.wb.save(Workbook.wbook_name)
 
         """Uses pandas to create a new field, Open/Close Delta."""
         ws2["D1"] = "Delta"
@@ -182,9 +182,9 @@ class Workbook:
         for dl in range(2, counter+1):
                 ws2["D{}".format(dl)] = df["Delta"][dl-2]
 
-        """Plots delta as 3D bar chart."""
+        """Plots delta as bar chart."""
         ws2.sheet_view.zoomScale = 85
-        bc_three_d = BarChart3D()
+        bc_three_d = BarChart()
         bc_three_d.type = "col"
         bc_three_d .style = 10
         bc_three_d .title = "Open/Close Delta for Past 30 Trading Days"
