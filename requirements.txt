@@ -1,0 +1,8 @@
+datetime
+sqlalchemy
+requests
+operator
+sys
+sqlite3
+openpyxl
+pandas
