@@ -180,7 +180,7 @@ class Workbook:
         df["Delta"] = df["OpenPrice"] - df["ClosePrice"]
 
         for dl in range(2, counter+1):
-                ws2["D{}".format(dl)] = df["Delta"][dl-2]
+                ws2["D{}".format(dl)] = float(df["Delta"][dl-2])
 
         """Plot delta as bar chart."""
         ws2.sheet_view.zoomScale = 85
