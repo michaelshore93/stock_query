@@ -32,7 +32,7 @@ c = conn.cursor()
 
 class Last_Ran_Check:
     def last_row_pr_key():
-        """Checks for last row of data's primary key."""
+        """Check for last row of data's primary key."""
         try:
             query = "SELECT * FROM {} ORDER BY Date_yyyy_mm_dd DESC LIMIT 1".format(stock)
             last_date = list(c.execute(query))[0][0]
@@ -47,7 +47,7 @@ class Last_Ran_Check:
 
 class JSON_Connection:
     def connect_json():
-        """Queries JSON of data."""
+        """Query JSON data."""
         last_date = Last_Ran_Check.last_row_pr_key()
         url = "https://www.quandl.com/api/v3/datasets/EOD/{}.json?api_key={}".format(stock, key.api_key)
         data_json = requests.get(url).json()
@@ -76,7 +76,7 @@ class JSON_Connection:
 
 
 class SL_Table(Base):
-    """Creates the table for the database."""
+    """Create the table for the database."""
     table_check = JSON_Connection.connect_json()
     if table_check != "Invalid ticker.":
         __tablename__ = stock
@@ -117,12 +117,12 @@ class Workbook:
     wb = Workbook()
 
     def closeprice():
-        """Creates an Excel Sheet in our Excel Workbook."""
+        """Create an Excel Sheet in our Excel Workbook."""
         ws = Workbook.wb.active
         ws.title = "Close Price"
         mysel, connection = DB_Connection.connect_db()
 
-        """Selects relevant data from database and writes it to Excel."""
+        """Select relevant data from database and writes it to Excel."""
         cursor = connection.execute("SELECT * FROM {}".format(stock))
         names = list(map(lambda x: x[0], cursor.description))
         idx = 1
@@ -137,7 +137,7 @@ class Workbook:
             counter += 1
             ws.append(post)
 
-        """Creates line chart of historical data close prices."""
+        """Create line chart of historical data close prices."""
         data = Reference(ws, min_col=2, min_row=counter-1499, max_row=counter, max_col=2)
         cats = Reference(ws, min_col=1, min_row=counter-1498, max_row=counter)
 
@@ -174,7 +174,7 @@ class Workbook:
             ws2.append(post)
         Workbook.wb.save(Workbook.wbook_name)
 
-        """Uses pandas to create a new field, Open/Close Delta."""
+        """Use pandas to create a new field, Open/Close Delta."""
         ws2["D1"] = "Delta"
         df = pd.read_excel(Workbook.wbook_name, "Open Close Delta")
         df["Delta"] = df["OpenPrice"] - df["ClosePrice"]
@@ -182,7 +182,7 @@ class Workbook:
         for dl in range(2, counter+1):
                 ws2["D{}".format(dl)] = df["Delta"][dl-2]
 
-        """Plots delta as bar chart."""
+        """Plot delta as bar chart."""
         ws2.sheet_view.zoomScale = 85
         bc_three_d = BarChart()
         bc_three_d.type = "col"
