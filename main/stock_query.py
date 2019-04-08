@@ -106,7 +106,7 @@ class DB_Session:
 
 class DB_Connection:
     def connect_db():
-        """Establishes connection with table in SQLite database."""
+        """Establish connection with table in SQLite database."""
         mysel = c.execute("SELECT * FROM {}".format(stock))
         connection = sqlite3.connect("stocks.db")
         return mysel, connection
@@ -154,7 +154,7 @@ class Workbook:
         Workbook.wb.save(Workbook.wbook_name)
 
     def open_close_delta():
-        """Creates a sheet for Open/Close delta."""
+        """Create a sheet for Open/Close delta."""
         ws2 = Workbook.wb.create_sheet("Open Close Delta")
         mysel, connection = DB_Connection.connect_db()
         cursor = connection.execute("SELECT * FROM {}".format(stock))
@@ -167,7 +167,7 @@ class Workbook:
                 idx += 1
 
         counter = 1
-        "Writes relevant data to Excel."
+        "Write relevant data to Excel."
         for i, row in enumerate(mysel):
             post = row[0], row[1], row[4]
             counter += 1
