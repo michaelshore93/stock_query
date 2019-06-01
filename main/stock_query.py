@@ -138,13 +138,13 @@ class Workbook:
             ws.append(post)
 
         """Create line chart of historical data close prices."""
-        data = Reference(ws, min_col=2, min_row=counter-1499, max_row=counter, max_col=2)
-        cats = Reference(ws, min_col=1, min_row=counter-1498, max_row=counter)
+        data = Reference(ws, min_col=2, min_row=1, max_row=counter, max_col=2)
+        cats = Reference(ws, min_col=1, min_row=2, max_row=counter)
 
         line = LineChart()
         line.add_data(data, titles_from_data=True)
         line.set_categories(cats)
-        line.title = "Closing Price of Last 1500 Closes"
+        line.title = "Closing Price"
         line.y_axis.title = "Price"
         line.x_axis.title = "Date"
         line.height = 10
@@ -199,6 +199,3 @@ class Workbook:
         bc_three_d.legend = None
         ws2.add_chart(bc_three_d, "F2")
         Workbook.wb.save(Workbook.wbook_name)
-
-
-c.close()
